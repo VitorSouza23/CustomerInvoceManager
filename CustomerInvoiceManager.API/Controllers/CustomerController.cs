@@ -1,54 +1,80 @@
-﻿using System;
+﻿using AutoMapper;
+using CustomerInvoiceManager.API.Models;
+using CustomerInvoiceManager.Entities;
+using CustomerInvoiceManager.Repository;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerInvoiceManager.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : ControllerBase
+    public class CustomerController : DataResponseControllerBase
     {
         private readonly IMapper _mapper;
+        private readonly DataContext _dataContext;
 
-        public CustomerController(IMapper mapper)
+        public CustomerController(IMapper mapper, DataContext dataContext)
         {
             _mapper = mapper;
+            _dataContext = dataContext;
         }
 
-        // GET: api/Customer
         [HttpGet]
-        public IEnumerable<string> Get()
+        public DataResponse<IEnumerable<CustomerModel>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return CreateDataResponse(() =>
+            {
+                IEnumerable<Customer> customers = _dataContext.Customers.ToList();
+                return _mapper.Map<IEnumerable<CustomerModel>>(customers);
+            });
         }
 
-        // GET: api/Customer/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public DataResponse<CustomerModel> Get(long id)
         {
-            return "value";
+            return CreateDataResponse(() =>
+            {
+                Customer customer = _dataContext.Customers.FirstOrDefault(c => c.ID == id);
+                return _mapper.Map<CustomerModel>(customer);
+            });
         }
 
-        // POST: api/Customer
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] CustomerModel value)
         {
+            if (ModelState.IsValid)
+            {
+                Customer customer = _mapper.Map<Customer>(value);
+                _dataContext.Customers.Add(customer);
+                _dataContext.SaveChanges();
+            }
         }
 
-        // PUT: api/Customer/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(long id, [FromBody] CustomerModel value)
         {
+            if (ModelState.IsValid)
+            {
+                Customer customer = _dataContext.Customers.FirstOrDefault(c => c.ID == id);
+                if (customer != null)
+                {
+                    customer.Name = value.Name;
+                    _dataContext.SaveChanges();
+                }
+            }
         }
 
-        // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(long id)
         {
+            Customer customer = _dataContext.Customers.FirstOrDefault(c => c.ID == id);
+            if (customer != null)
+            {
+                _dataContext.Customers.Remove(customer);
+                _dataContext.SaveChanges();
+            }
         }
     }
 }

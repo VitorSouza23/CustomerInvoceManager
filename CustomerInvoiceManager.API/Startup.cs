@@ -31,7 +31,7 @@ namespace CustomerInvoiceManager.API
         {
             services.AddControllers();
             services.AddAutoMapper(typeof(CustomerModelMap));
-            services.AddSingleton<DbContext, DataContext>();
+            services.AddSingleton<DataContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
