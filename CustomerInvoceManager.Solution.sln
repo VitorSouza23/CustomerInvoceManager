@@ -5,11 +5,15 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{5A4990D6-39F5-40E0-8122-15EEFA30D369}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerInvoiceManager.Entities", "CustomerInvoiceManager.Entities\CustomerInvoiceManager.Entities.csproj", "{E7FE97BB-DCE5-4171-B934-7DECA81F7405}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerInvoiceManager.Entities", "CustomerInvoiceManager.Entities\CustomerInvoiceManager.Entities.csproj", "{E7FE97BB-DCE5-4171-B934-7DECA81F7405}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAO", "DAO", "{656CFE30-9BA8-4D37-92CF-081D8B58EE91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerInvoiceManager.Repository", "CustomerInvoiceManager.Repository\CustomerInvoiceManager.Repository.csproj", "{0C3CC009-0057-42F0-8689-98595CF20A89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerInvoiceManager.Repository", "CustomerInvoiceManager.Repository\CustomerInvoiceManager.Repository.csproj", "{0C3CC009-0057-42F0-8689-98595CF20A89}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{FBEE9FB5-7E36-4A99-B606-ADDD830AB3B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerInvoiceManager.API", "CustomerInvoiceManager.API\CustomerInvoiceManager.API.csproj", "{2A615F75-0E6B-43D1-9F52-67BA0398277E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +29,10 @@ Global
 		{0C3CC009-0057-42F0-8689-98595CF20A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C3CC009-0057-42F0-8689-98595CF20A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C3CC009-0057-42F0-8689-98595CF20A89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A615F75-0E6B-43D1-9F52-67BA0398277E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A615F75-0E6B-43D1-9F52-67BA0398277E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A615F75-0E6B-43D1-9F52-67BA0398277E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A615F75-0E6B-43D1-9F52-67BA0398277E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E7FE97BB-DCE5-4171-B934-7DECA81F7405} = {5A4990D6-39F5-40E0-8122-15EEFA30D369}
 		{0C3CC009-0057-42F0-8689-98595CF20A89} = {656CFE30-9BA8-4D37-92CF-081D8B58EE91}
+		{2A615F75-0E6B-43D1-9F52-67BA0398277E} = {FBEE9FB5-7E36-4A99-B606-ADDD830AB3B1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C71EE4E6-9A9E-4C8F-B298-776C794DDAF1}
