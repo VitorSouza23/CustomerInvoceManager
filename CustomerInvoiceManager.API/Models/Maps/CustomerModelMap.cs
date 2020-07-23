@@ -11,8 +11,8 @@ namespace CustomerInvoiceManager.API.Models.Maps
     {
         public CustomerModelMap()
         {
-            CreateMap<Customer, CustomerModel>();
-            CreateMap<CustomerModel, Customer>();
+            CreateMap<Customer, CustomerModel>()
+                .ReverseMap();
         }
     }
 }

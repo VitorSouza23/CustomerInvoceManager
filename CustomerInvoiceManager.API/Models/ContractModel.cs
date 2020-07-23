@@ -1,13 +1,14 @@
-﻿using System;
+﻿using CustomerInvoiceManager.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace CustomerInvoiceManager.Entities
+namespace CustomerInvoiceManager.API.Models
 {
-    public class Contract
+    public class ContractModel
     {
-        [Key]
         public long ID { get; set; }
 
         [Required]
@@ -33,21 +34,6 @@ namespace CustomerInvoiceManager.Entities
 
         public double LateInterest { get; set; }
 
-        public virtual ICollection<Invoice> Invoices { get; set; }
-
-        [Required]
-        public virtual Customer Customer { get; set; }
-
-        public DateTime GetFirstDate() => new DateTime(StartYear, StartMonth.GetHashCode(), BilingStyartDay);
-
-        public DateTime? GetEndDate()
-        {
-            if(EndMotnh.HasValue && EndYear.HasValue)
-            {
-                return new DateTime(EndYear.Value, EndMotnh.Value.GetHashCode(), BilingStyartDay);
-            }
-
-            return null;
-        }
+        public long CustomerID { get; set; }
     }
 }

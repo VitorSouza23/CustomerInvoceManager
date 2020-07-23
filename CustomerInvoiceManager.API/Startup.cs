@@ -30,7 +30,7 @@ namespace CustomerInvoiceManager.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddAutoMapper(typeof(CustomerModelMap));
+            services.AddAutoMapper(typeof(CustomerModelMap), typeof(ContractModelMap));
             services.AddSingleton<DataContext>();
         }
 
