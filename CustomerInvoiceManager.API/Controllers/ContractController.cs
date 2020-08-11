@@ -28,13 +28,13 @@ namespace CustomerInvoiceManager.API.Controllers
         {
             return CreateDataResponse(() =>
             {
-                IEnumerable<Contract> customers = _dataContext.Contracts.ToList();
-                return _mapper.Map<IEnumerable<ContractModel>>(customers);
+                IEnumerable<Contract> contracts = _dataContext.Contracts.ToList();
+                return _mapper.Map<IEnumerable<ContractModel>>(contracts);
             });
         }
 
         [HttpGet("{id}")]
-        public DataResponse<ContractModel> Get(int id)
+        public DataResponse<ContractModel> Get(long id)
         {
             return CreateDataResponse(() =>
             {
@@ -55,7 +55,7 @@ namespace CustomerInvoiceManager.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] ContractModel contractModel)
+        public void Put(long id, [FromBody] ContractModel contractModel)
         {
             if (ModelState.IsValid)
             {
@@ -76,7 +76,7 @@ namespace CustomerInvoiceManager.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(long id)
         {
             Contract contract = _dataContext.Contracts.FirstOrDefault(c => c.ID == id);
             if (contract != null)
@@ -84,6 +84,16 @@ namespace CustomerInvoiceManager.API.Controllers
                 _dataContext.Contracts.Remove(contract);
                 _dataContext.SaveChanges();
             }
+        }
+
+        [HttpGet("customer/{id}")]
+        public DataResponse<IEnumerable<ContractModel>> GetAllCustomerContracts(long id)
+        {
+            return CreateDataResponse(() =>
+            {
+                IEnumerable<Contract> contracts = _dataContext.Contracts.Where(c => c.Customer.ID == id).ToList();
+                return _mapper.Map<IEnumerable<ContractModel>>(contracts);
+            });
         }
     }
 }
