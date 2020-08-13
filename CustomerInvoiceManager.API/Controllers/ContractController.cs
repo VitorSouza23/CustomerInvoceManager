@@ -62,14 +62,8 @@ namespace CustomerInvoiceManager.API.Controllers
                 Contract contract = _dataContext.Contracts.FirstOrDefault(c => c.ID == id);
                 if (contract != null)
                 {
-                    contract.Name = contractModel.Name;
-                    contract.BilingStyartDay = contractModel.BilingStyartDay;
-                    contract.DeductibleAmount = contractModel.DeductibleAmount;
-                    contract.EndMotnh = contractModel.EndMotnh;
-                    contract.EndYear = contractModel.EndYear;
-                    contract.LateInterest = contractModel.LateInterest;
-                    contract.StartMonth = contractModel.StartMonth;
-                    contract.StartYear = contractModel.StartYear;
+                    _mapper.Map(contractModel, contract);
+                    contract.ID = id;
                     _dataContext.SaveChanges();
                 }
             }

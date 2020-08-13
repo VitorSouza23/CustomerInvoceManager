@@ -60,7 +60,8 @@ namespace CustomerInvoiceManager.API.Controllers
                 Customer customer = _dataContext.Customers.FirstOrDefault(c => c.ID == id);
                 if (customer != null)
                 {
-                    customer.Name = value.Name;
+                    _mapper.Map(value, customer);
+                    customer.ID = id;
                     _dataContext.SaveChanges();
                 }
             }
