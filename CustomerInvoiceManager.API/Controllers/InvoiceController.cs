@@ -7,6 +7,7 @@ using CustomerInvoiceManager.API.Models;
 using CustomerInvoiceManager.Entities;
 using CustomerInvoiceManager.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CustomerInvoiceManager.API.Controllers
 {
@@ -86,7 +87,8 @@ namespace CustomerInvoiceManager.API.Controllers
             return CreateDataResponse(() =>
             {
                 IEnumerable<Invoice> invoices = _dataContext.Invoices
-                    .Where(i => i.Contract.ID == id);
+                    .Where(i => i.Contract.ID == id)
+                    .Include(i => i.Contract);
 
                 return _mapper.Map<IEnumerable<InvoiceModel>>(invoices);
             });
@@ -98,7 +100,8 @@ namespace CustomerInvoiceManager.API.Controllers
             return CreateDataResponse(() =>
             {
                 IEnumerable<Invoice> invoices = _dataContext.Invoices
-                    .Where(i => i.Contract.Customer.ID == id);
+                    .Where(i => i.Contract.Customer.ID == id)
+                    .Include(i => i.Contract);
 
                 return _mapper.Map<IEnumerable<InvoiceModel>>(invoices);
             });
